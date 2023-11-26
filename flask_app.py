@@ -204,4 +204,4 @@ def save_image():
     return jsonify({"message": f"Image URL saved successfully. URL: {image_url}"})
 
 if __name__ == '__main__':
-    app.run(ssl_context=('openSSL/cert.pem', 'openSSL/key.pem'), debug=True, port=5001)
+    app.run(ssl_context=('openSSL/cert.pem', 'openSSL/key.pem'), debug=True, port=5001, host='0.0.0.0')
