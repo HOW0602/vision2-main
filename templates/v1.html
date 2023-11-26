@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision API Demo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- 이미지 정보 입력 폼 -->
+        <form id="image-form">
+            <div class="mb-3">
+                <label for="image_infor" class="form-label">이미지 정보</label>
+                <input type="text" class="form-control" id="image_infor" value="https://www.jeju.go.kr/files/editor/4f81874a-321d-4926-a34e-c09cadd33fce.jpg">
+                <img id="displayed-image" src="https://www.jeju.go.kr/files/editor/4f81874a-321d-4926-a34e-c09cadd33fce.jpg" class="img-fluid my-3">
+            </div>
+
+            <div class="mb-3 d-flex">
+                <input type="text" class="form-control" id="prompt" value="이미지를 설명해주세요." aria-label="prompt">
+                <button type="submit" class="btn btn-primary ms-2">전송</button>
+            </div>
+        </form>
+        <!-- 결과 출력 구역 -->
+        <div id="result" class="my-3"></div>
+        <!-- 로딩 스피너 -->
+        <div id="loading" class="spinner-border text-primary" role="status" style="display: none;">
+            <span class="visually-hidden">로딩중...</span>
+        </div>
+        <!-- 참고 사이트 링크 -->
+        <div class="mt-4">
+            <a href="https://platform.openai.com/docs/guides/vision">OpenAI Vision API 참고 사이트</a>
+        </div>
+    </div>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Script -->
+    <script>
+        $(document).ready(function() {
+            // 이미지 정보 입력시 이미지 변경 이벤트 핸들러
+            $('#image_infor').change(function() {
+                $('#displayed-image').attr('src', $(this).val());
+            });
+
+            // 폼 제출 이벤트 핸들러
+            $('#image-form').submit(function(event) {
+                event.preventDefault();
+                $('#loading').show(); // 스피너 보여주기
+                var promptValue = $('#prompt').val();
+                var imageInforValue = $('#image_infor').val();
+                
+                // API 호출
+                $.ajax({
+                    url: '/vision', // 서버의 Vision API 엔드포인트
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ prompt: promptValue, image_infor: imageInforValue }),
+                    success: function(response) {
+                        $('#result').html(response.content); // 결과 출력
+                        $('#loading').hide(); // 스피너 숨기기
+                    },
+                    error: function() {
+                        $('#result').html('오류가 발생했습니다.');
+                        $('#loading').hide(); // 스피너 숨기기
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

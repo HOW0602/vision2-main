@@ -1,0 +1,76 @@
+# vision1.html 생성 프롬프트 
+# vision api  프론트엔드 코드
+
+# 한글로 답하고 주석을  달것
+# 타이틀 vision1
+# 주어진는 코드를 보고 vision api 사용될 프론트엔드 코드(html,javascript)를 만들어주세요.
+# jquery 3.6 버전, 부트스크랩 5.3.2 버전을 사용한다.
+# 부트스크랩 class를 효율적으로 활용하여 보기좋게 화면을 반응형으로 디자인 할것 
+# image_infor 입력 받을 것, form-contral 클래스 사용 
+# image_infor 초기 값는 'https://www.jeju.go.kr/files/editor/4f81874a-321d-4926-a34e-c09cadd33fce.jpg'
+# image_infor 입력 창 아래는 image_infor 이미지를 보여주세요
+# image_infor 값이 바뀌면 바뀐 이미지를 보여줍니다.
+# promtt 입력 받을 것, form-contral 클래스 사용 
+# prompt 기본 값은 "이미지를 설명해주세요."
+# prompt 아래은 api 리턴 값 출력하는 div(result) 만듬 
+# 전송버튼 위치는 prompt 입력 박스 오른쪽에 전송버튼이 나도록 합니다. 
+# 전송버튼을 클릭하면 결과가 올때까지 spinner를 보여주세요
+# API 호출 코드 작성, 호출 API에서  받아온 값(reponse)을 result에 출력하게 합니다. 
+# 화면하단에 다음 참고 사이트 링크 
+# https://platform.openai.com/docs/guides/vision
+
+
+현재 작성된코드 
+@app.route("/vision", methods=["POST"])
+def vision():
+    prompt = request.json.get("prompt")
+    image_infor = request.json.get("image_infor") 
+    print( "vision prompt=", prompt )
+    print( "image_infor=", image_infor[:50] )
+    re=ds.vision_talk(prompt=prompt,image_infor=image_infor)
+
+    print( re )
+    
+    return jsonify(re)
+
+# ds.vision_talk
+def vision_talk( prompt="이 이미지는 무엇을 보여주고 있지?", image_infor="" ):
+    client = OpenAI()
+    image_url=""
+    if 'http://' in image_infor or 'https://' in image_infor :
+        image_url = image_infor
+    else:
+        if   "base64" in image_infor:
+              image_url = image_infor
+        else:      
+             image_url= f"data:image/jpeg;base64,{image_infor}"
+
+    # print("image_url=","="*100 )
+    # print(image_url[:1000] )
+    response = client.chat.completions.create(
+        model="gpt-4-vision-preview",
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": prompt },
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": image_url, 
+                        }
+                    },
+                ],
+            }
+        ],
+        max_tokens=1000,
+
+    )
+    rep=response.choices[0].message
+    re={ 
+        "content":rep.content,
+        "role": 'assistant',
+        "function_call":rep.function_call if rep.function_call !=None else "",
+        "tool_calls":rep.tool_calls if rep.tool_calls !=None else ""
+    }
+    return re

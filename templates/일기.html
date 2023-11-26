@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일기 작성</title>
+</head>
+<body>
+    <h1>일기 작성</h1>
+
+    <!-- 추가된 부분: 날짜 선택 버튼 -->
+    <label for="일기_날짜">날짜 선택:</label>
+    <input type="date" id="일기_날짜" name="일기_날짜" required>
+    <button type="button" onclick="addDiary()">날짜 선택</button>
+
+    <!-- 일기 작성 폼 -->
+    <form method="post" action="/일기">
+        <label for="일기_항목">일기 내용을 입력하세요:</label><br>
+        <textarea id="일기_항목" name="일기_항목" rows="4" cols="50" required></textarea><br>
+        <input type="submit" value="저장">
+    </form>
+
+    <script>
+        // 추가된 부분: 날짜 선택 버튼 클릭 이벤트 핸들러
+        function addDiary() {
+            // 선택한 날짜 가져오기
+            var selectedDate = document.getElementById("일기_날짜").value;
+
+            // 저장 버튼 클릭 시 일기 내용 alert
+            document.querySelector('form').addEventListener('submit', function(event) {
+                event.preventDefault(); // 기본 폼 제출 동작 방지
+                var diaryContent = document.getElementById("일기_항목").value;
+                alert("날짜: " + selectedDate + "\n일기 내용:\n" + diaryContent);
+            });
+
+            // 선택한 날짜를 기반으로 일기 작성 페이지로 이동 (실제 서버로의 이동을 위해서는 수정 필요)
+            // window.location.href = '/일기?날짜=' + selectedDate;
+        }
+    </script>
+</body>
+</html>

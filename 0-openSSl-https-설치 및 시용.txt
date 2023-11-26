@@ -1,0 +1,42 @@
+openssl 설치방법 (참고 사이트: https://warmdeveloper.tistory.com/64)
+    설치파일은 files 폴더에 있음
+    Win64OpenSSL_Light-3_1_4.msi
+
+설치 후  환경변수 설정
+
+1. path 추가 -> 시스템 변수에서 Path를 클릭 -> 편집 -> 새로만들기 
+            -> 다음 내용(OpenSSL을 설치한 경로로 가서 bin폴더 경로를 복사한 후에) 입력 
+ C:\Program Files\OpenSSL-Win64\bin
+ -> 확인 
+
+2. OPENSSL_CONF라는 환경변수를 새롭게 생성
+   [시스템 변수] 에서 [새로만들기] 클릭 
+   변수이름: OPENSSL_CONF 
+   변수값  : C:\Program Files\OpenSSL-Win64\bin\openssl.cfg
+
+   --> 확인
+   
+VS CODE 새로시작
+
+방법
+
+인증기 발급
+터미널에거 다음을 실행 
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+
+
+key.pem , cert.pem 파일이 생김  
+
+아래처럼 수정 후 실행 ( host="0.0.0.0" 안됨)
+
+# if __name__ == '__main__':
+#     app.run(debug=True, host="0.0.0.0", port=5001)
+
+if __name__ == '__main__':
+    app.run(ssl_context=('openSSL/cert.pem', 'openSSL/key.pem'),debug=True,  port=5001)    
+
+
+실행 후 경고창에서 [고급] 클릭   
+
+안전하지 않음(https://127.0.0.1:5001/)으로 이동 클릭
+
