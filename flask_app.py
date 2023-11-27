@@ -7,8 +7,6 @@ from langchain.document_loaders import TextLoader
 app = Flask(__name__)
 app.secret_key = 'GTalkStory'
 # loader = WebBaseLoader(web_path="https://jeju-s.jje.hs.kr/jeju-s/0102/history")
-chat_story = TextLoader("data\story.txt", encoding='utf-8').load()[0].page_content
-# print(chat_story)
 
 # 이미지가 저장될 디렉토리를 설정합니다.
 UPLOAD_FOLDER = 'saved_images'
