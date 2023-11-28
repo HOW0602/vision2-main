@@ -13,100 +13,10 @@ UPLOAD_FOLDER = 'saved_images'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
-def hello():
-    ret = """
-<!DOCTYPE html>
-<html lang="ko">
+def index():
+ 
+      return send_from_directory("templates", "start.html")
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>네컷일기 시작 페이지</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            transition: background 1s ease; /* Add transition for smooth color change */
-        }
-
-        h1 {
-            font-size: 2em;
-            margin: 0;
-        }
-
-        a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-        }
-
-        /* Add style for the about section */
-        #about {
-            margin-top: 50px; /* Adjusted margin-top */
-        }
-
-        /* Add style for the highlighted text */
-        #highlighted-text {
-            color: red;
-            font-weight: bold;
-            font-size:200%;
-        }
-    </style>
-</head>
-
-<body>
-    <pre>
-    <h1>
-<a href="/dalle.html"><span id="highlighted-text">네컷일기를 작성해주세요</span></a>
-    </h1>
-    
-    <!-- About Section -->
-    <div id="about">
-        <h2>누가 만들었을까용??</h2>
-        <p>제작자 이건우는 씹덕입니다! 남자인 것이 특징이죠. 정말 안타깝네요... 김태이는 집에 가고 싶어 보입니다!</p>
-        <p>그런데 이 프로젝트는 정말 재미있습니다. 무려 주말 2일 만에 다 만들어버린 코드라는 것이죠!</p>
-        <p> 무려 이런 정보 수행을 주말에 다 끝내다니 제작자들이 한심하지 않나요?? </p>
-        <p> 이 네컷일기 사이트에 들어온것은 정말 행운일 것입니다! 축하합니다!! 😎😉 </p>
-    </div>
-    </pre>
-    <script>
-        // JavaScript to change background color based on random color
-        function updateBackgroundColor() {
-            var body = document.body;
-
-            var color = getRandomColor();
-            body.style.background = color;
-        }
-
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-
-        // Call the function on page load
-        updateBackgroundColor();
-
-        // Update background color every second
-        setInterval(updateBackgroundColor, 5000);
-    </script>
-</body>
-
-</html>
-
-
-    """
-    return ret
 
 @app.route('/download/<filename>')
 def download_file(filename):
@@ -123,6 +33,11 @@ def images(filename):
 @app.route('/chat_audio/<filename>')
 def chat_audio(filename):
     return send_from_directory("templates/chat_audio", filename)
+
+@app.route('/<path:page>')
+def pathpage(page):
+        print(page)
+        return send_from_directory("templates", page)
 
 @app.route('/<page>')
 def page(page):
