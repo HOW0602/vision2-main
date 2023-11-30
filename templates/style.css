@@ -1,11 +1,18 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Gasoek+One&family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gasoek+One&family=Vina+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;700&family=Gasoek+One&family=Vina+Sans&display=swap');
+
 body {
-    font-family: 'Noto Sans KR', sans-serif; /* 폰트 변경 */
+    font-family: 'Nanum Pen Script', cursive;
     margin: 0;
     padding: 0;
-    font-size: 24px;
+    font-size: 30px;
     line-height: 2;
 }
 #header {
+    font-family: 'Vina Sans', sans-serif;
+    font-size: 40px;
     background-color: #f1f1f1;
     padding: 15px;
     text-align: center;
@@ -28,10 +35,12 @@ body {
     color: #fff;
 }
 #jeju-button {
+    font-family: 'Vina Sans', sans-serif;
     background-color: #4CAF50;
     border: none;
 }
 #eduzen-button {
+    font-family: 'Vina Sans', sans-serif;
     background-color: #008CBA;
     border: none;
 }
@@ -59,6 +68,16 @@ body {
     margin: 20px auto; /* 가운데 정렬 */
     padding: 10px 20px; /* 추가 */
     text-align: center;
+}
+#write-diary1 {
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(255, 17, 211);
+    color: #fff;
+    border-radius: 15px;
+    display: block;
+    margin: 20px 
 }
 #footer {
     background-color: #f1f1f1;

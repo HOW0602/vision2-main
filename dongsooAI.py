@@ -58,7 +58,7 @@ def image_create(prompt="ex:탕후루를 먹었다 이빨이 아파서 병원에
     # 이미지 생성 요청
     response = client.images.generate(
         model="dall-e-3",
-        prompt=prompt + "A four-cut Korean cartoon is wrapped in a pretty pink rectangular frame. There's no writing  ",
+        prompt=prompt + "A four-cut cute Korean cartoon. There's no writing no word no text!!  ",
         size=size,
         quality=quality,
         n=n,

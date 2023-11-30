@@ -14,6 +14,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         /* ... (unchanged styles) */
+        .mb-3 {
+            margin-bottom: 20px; /* Increased spacing between each row */
+        }
+
+        .btn {
+            margin-top: 20px; /* Increased spacing between checkboxes and buttons */
+        }
+
+        /* Hide the checkboxes initially */
+        .settings-checkboxes {
+            display: none;
+        }
     </style>
 </head>
 
@@ -27,109 +39,65 @@
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="prompt" placeholder="ex:탕후루를 먹었다 이빨이 아파서 병원에 갔다 치료를 하고 잠에 들었다" value="">
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="joyCheckbox" value="기쁨">
-                        <label class="form-check-label" for="joyCheckbox">기쁨</label>
-                    </div>
-                    
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="sadnessCheckbox" value="슬픔">
-                        <label class="form-check-label" for="sadnessCheckbox">슬픔</label>
-                    </div>
-                    
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="depressionCheckbox" value="우울">
-                        <label class="form-check-label" for="depressionCheckbox">우울</label>
-                    </div>
-                    
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="happinessCheckbox" value="행복">
-                        <label class="form-check-label" for="happinessCheckbox">행복</label>
-                    </div>
-                    
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="angerCheckbox" value="분노">
-                        <label class="form-check-label" for="angerCheckbox">분노</label>
-                    </div>
-                    
-                   
-                    </div>
-                    
-                    <!-- 추가된 부분: 행동 체크박스 -->
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="soccerCheckbox" value="축구를 했다">
-                            <label class="form-check-label" for="soccerCheckbox">축구를 했다</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gameCheckbox" value="게임을 했다">
-                            <label class="form-check-label" for="gameCheckbox">게임을 했다</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="studyCheckbox" value="공부를 했다">
-                            <label class="form-check-label" for="studyCheckbox">공부를 했다</label>
-                        </div>
-                    </div>
-
-                    <!-- 추가된 부분: 날씨 체크박스 -->
-                    
-                    <div class="col">
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="soccerCheckbox" value="맑음">
-                            <label class="form-check-label" for="soccerCheckbox">맑음</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gameCheckbox" value="흐림">
-                            <label class="form-check-label" for="gameCheckbox">흐림</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="studyCheckbox" value="비">
-                            <label class="form-check-label" for="studyCheckbox">비</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gameCheckbox" value="눈">
-                            <label class="form-check-label" for="gameCheckbox">눈</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="studyCheckbox" value="천둥번개">
-                            <label class="form-check-label" for="studyCheckbox">천둥번개</label>
-                        </div>
-                    </div>
-
-                    
-                    <div class="col">
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="soccerCheckbox" value="남자">
-                                <label class="form-check-label" for="soccerCheckbox">남자</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gameCheckbox" value="여자">
-                                <label class="form-check-label" for="gameCheckbox">여자</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="studyCheckbox" value="어린이">
-                                <label class="form-check-label" for="studyCheckbox">어린이</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gameCheckbox" value="청소년">
-                                <label class="form-check-label" for="gameCheckbox">청소년</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="studyCheckbox" value="어른">
-                                <label class="form-check-label" for="studyCheckbox">어른</label>
-                            </div>
-                        </div>                    
-
-
-
-                    <!-- Buttons -->
-                    <button class="btn btn-primary" type="button" id="submit">전송</button>
-                    
+                    <input type="text" class="form-control" id="prompt"
+                        
+                        placeholder="ex:탕후루를 먹었다 이빨이 아파서 병원에 갔다 치료를 하고 잠에 들었다" value="">
                 </div>
+
+                <!-- 추가된 부분: 감정, 행동, 날씨 체크박스를 가로로 나타내기 -->
+                <div class="mb-3 settings-checkboxes">
+                    
+                    <!-- 추가된 부분: 날씨 체크박스를 가로로 나타내기 -->
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="clearCheckbox" value="맑음">
+                        <label class="form-check-label" for="clearCheckbox">맑음</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="cloudyCheckbox" value="흐림">
+                        <label class="form-check-label" for="cloudyCheckbox">흐림</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="rainCheckbox" value="비">
+                        <label class="form-check-label" for="rainCheckbox">비</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="snowCheckbox" value="눈">
+                        <label class="form-check-label" for="snowCheckbox">눈</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="thunderstormCheckbox"
+                            value="천둥번개">
+                        <label class="form-check-label" for="thunderstormCheckbox">천둥번개</label>
+                    </div>
+                    <p></p>
+                    <!-- 추가된 부분: 인물 체크박스를 가로로 나타내기 -->
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="maleCheckbox" value="남자">
+                        <label class="form-check-label" for="maleCheckbox">남자</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="femaleCheckbox" value="여자">
+                        <label class="form-check-label" for="femaleCheckbox">여자</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="childCheckbox" value="어린이">
+                        <label class="form-check-label" for="childCheckbox">어린이</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="teenCheckbox" value="청소년">
+                        <label class="form-check-label" for="teenCheckbox">청소년</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="adultCheckbox" value="어른">
+                        <label class="form-check-label" for="adultCheckbox">어른</label>
+                    </div>
+                </div>
+
+                <!-- 추가된 부분: 설정 버튼 -->
+                <button class="btn btn-secondary" type="button" id="settingsButton">설정</button>
+
+                <!-- 전송 버튼 -->
+                <button class="btn btn-primary" type="button" id="submit">그림 일기 생성!</button>
 
                 <div id="result" class="mb-3">
                     <div class="spinner-border text-primary" role="status" style="display: none;">
@@ -144,48 +112,53 @@
     </div>
 
     <script>
-     $(document).ready(function () {
-        $('#saveImage').click(function () {
-            // 이미지 저장 완료 메시지 표시
-            alert('이미지 저장 완료!');
-        });
+        $(document).ready(function () {
+            $('#saveImage').click(function () {
+                // 이미지 저장 완료 메시지 표시
+                alert('이미지 저장 완료!');
+            });
 
-        $('#submit').click(function () {
-            // 전송 전에 확인 대화 상자 표시
-            if (confirm('이미지를 생성하시겠습니까?')) {
-                var promptValue = $('#prompt').val();
-                var selectedDate = $('#selectedDate').val();
+            // 설정 버튼 클릭 시 설정 체크박스 나타내기
+            $('#settingsButton').click(function () {
+                $('.settings-checkboxes').toggle();
+            });
 
-                // Get the values of selected checkboxes
-                var selectedEmotions = [];
-                $('input[type=checkbox]:checked').each(function () {
-                    selectedEmotions.push($(this).val());
-                });
+            $('#submit').click(function () {
+                // 전송 전에 확인 대화 상자 표시
+                if (confirm('이미지를 생성하시겠습니까?')) {
+                    var promptValue = $('#prompt').val();
+                    var selectedDate = $('#selectedDate').val();
 
-                // Show alert with selected checkboxes' text
-                alert('Selected Emotions: ' + selectedEmotions.join(', '));
+                    // Get the values of selected checkboxes
+                    var selectedEmotions = [];
+                    $('input[type=checkbox]:checked').each(function () {
+                        selectedEmotions.push($(this).val());
+                    });
 
-                $('#result .spinner-border').show();
-                $.ajax({
-                    url: '/dalle3',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ prompt: promptValue + selectedEmotions, date: selectedDate }),
-                    success: function (response) {
-                        console.log(response);
-                        image_url = response.url ? response.url : response;
-                        $('#result').html(`<img src="${image_url}" class="img-fluid" style="width:50%" alt="Generated Image">`);
-                    },
-                    error: function (xhr, status, error) {
-                        $('#result').html('API 호출에 실패했습니다: ' + error);
-                    },
-                    complete: function () {
-                        $('#result .spinner-border').hide();
-                    }
-                });
-            }
-            // 사용자가 확인하지 않으면 아무 동작도 하지 않음
-        });
+                    // Show alert with selected checkboxes' text
+                    alert('Selected Settings: ' + selectedEmotions.join(', '));
+
+                    $('#result .spinner-border').show();
+                    $.ajax({
+                        url: '/dalle3',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ prompt: promptValue + selectedEmotions, date: selectedDate }),
+                        success: function (response) {
+                            console.log(response);
+                            image_url = response.url ? response.url : response;
+                            $('#result').html(`<img src="${image_url}" class="img-fluid" style="width:50%" alt="Generated Image">`);
+                        },
+                        error: function (xhr, status, error) {
+                            $('#result').html('API 호출에 실패했습니다: ' + error);
+                        },
+                        complete: function () {
+                            $('#result .spinner-border').hide();
+                        }
+                    });
+                }
+                // 사용자가 확인하지 않으면 아무 동작도 하지 않음
+            });
             // ... (rest of the code remains unchanged)
         });
     </script>
